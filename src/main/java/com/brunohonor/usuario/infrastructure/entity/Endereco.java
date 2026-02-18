@@ -1,10 +1,8 @@
 package com.brunohonor.usuario.infrastructure.entity;
 
+import com.brunohonor.usuario.business.dto.EnderecoDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name= "endereco")
+@Builder
 public class Endereco {
 
     @Id
@@ -31,6 +30,9 @@ public class Endereco {
     private String cidade;
     @Column(name = "estado", length = 2)
     private String estado;
+
+    public Endereco(EnderecoDTO endDTO) {
+    }
 
 //    @ManyToOne
 //    @JoinColumn(name = "idusuario")

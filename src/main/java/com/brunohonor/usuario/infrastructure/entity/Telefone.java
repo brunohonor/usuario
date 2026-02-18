@@ -1,10 +1,9 @@
 package com.brunohonor.usuario.infrastructure.entity;
 
+import com.brunohonor.usuario.business.dto.EnderecoDTO;
+import com.brunohonor.usuario.business.dto.TelefoneDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name= "telefone")
+@Builder
 public class Telefone {
 
     @Id
@@ -21,4 +21,8 @@ public class Telefone {
     private String numero;
     @Column(name = "ddd" , length = 3)
     private String ddd;
+
+    public Telefone(TelefoneDTO telefoneDTO) {
+        this.numero = telefoneDTO.getNumero();
+    }
 }
