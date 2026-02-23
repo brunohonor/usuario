@@ -6,14 +6,19 @@ import com.brunohonor.usuario.business.dto.UsuarioDTO;
 import com.brunohonor.usuario.infrastructure.entity.Endereco;
 import com.brunohonor.usuario.infrastructure.entity.Telefone;
 import com.brunohonor.usuario.infrastructure.entity.Usuario;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Component
 public class UsuarioConverter {
 
-    public  UsuarioDTO paraUsuarioDTO(Usuario usuarioDTO){
+    public UsuarioDTO paraUsuarioDTO(Usuario usuarioDTO) {
         return UsuarioDTO.builder()
                 .nome(usuarioDTO.getNome())
                 .email(usuarioDTO.getEmail())
@@ -23,11 +28,11 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public  List<EnderecoDTO> paraListaEnderecoDTO(List<Endereco> enderecoDTOS){
+    public List<EnderecoDTO> paraListaEnderecoDTO(List<Endereco> enderecoDTOS) {
         return enderecoDTOS.stream().map(UsuarioConverter::paraEnderecoDTO).toList();
     }
 
-    public static EnderecoDTO paraEnderecoDTO(Endereco enderecoDTO){
+    public static EnderecoDTO paraEnderecoDTO(Endereco enderecoDTO) {
         return EnderecoDTO.builder()
                 .rua(enderecoDTO.getRua())
                 .bairro(enderecoDTO.getBairro())
@@ -39,19 +44,19 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public  List<TelefoneDTO> paraListaTelefoneDTO(List<Telefone> telefoneDTO){
+    public List<TelefoneDTO> paraListaTelefoneDTO(List<Telefone> telefoneDTO) {
         return telefoneDTO.stream().map(UsuarioConverter::paraTelefoneDTO).toList();
 
     }
 
-    public static TelefoneDTO paraTelefoneDTO(Telefone telefoneDTO){
+    public static TelefoneDTO paraTelefoneDTO(Telefone telefoneDTO) {
         return TelefoneDTO.builder()
                 .numero(telefoneDTO.getNumero())
                 .ddd(telefoneDTO.getDdd())
                 .build();
     }
 
-    public  Usuario DTOparaUsuario(UsuarioDTO dto) {
+    public Usuario DTOparaUsuario(UsuarioDTO dto) {
         return Usuario.builder()
                 .nome(dto.getNome())
                 .senha(dto.getSenha())
@@ -62,8 +67,22 @@ public class UsuarioConverter {
 
     }
 
+    public Usuario updateUsuario(UsuarioDTO usuario, Usuario entity) {
+        return Usuario.builder()
+                .id(entity.getId())
+                .nome(usuario.getNome() != null ? usuario.getNome() : entity.getNome())
+                .email(usuario.getEmail() != null ? usuario.getEmail() : entity.getEmail())
+                .senha(usuario.getSenha() != null ? usuario.getSenha() : entity.getSenha())
+                .enderecos(entity.getEnderecos())
+                .telefones(entity.getTelefones())
+                .build();
+    }
+
 
 }
+
+
+
 
 
 

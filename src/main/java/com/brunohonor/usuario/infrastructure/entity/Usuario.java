@@ -21,6 +21,7 @@ public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column
     private String id;
     @Column(name = "nome" , length = 100)
     private String nome;
