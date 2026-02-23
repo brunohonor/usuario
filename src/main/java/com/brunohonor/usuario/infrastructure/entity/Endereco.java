@@ -31,7 +31,14 @@ public class Endereco {
     @Column(name = "estado", length = 2)
     private String estado;
 
-    public Endereco(EnderecoDTO endDTO) {
+    public Endereco(EnderecoDTO dto) {
+        this.rua = dto.getRua();
+        this.bairro = dto.getBairro();
+        this.cep = dto.getCep();
+        this.numero = dto.getNumero();
+        this.complemento = dto.getComplemento();
+        this.cidade = dto.getCidade();
+        this.estado = dto.getEstado();
     }
 
 //    @ManyToOne

@@ -12,6 +12,7 @@ import lombok.*;
 public class EnderecoDTO {
 
     private String rua;
+    private String bairro;
     private String cep;
     private String numero;
     private String complemento;

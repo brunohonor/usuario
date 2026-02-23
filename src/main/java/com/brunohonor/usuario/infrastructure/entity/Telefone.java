@@ -24,5 +24,6 @@ public class Telefone {
 
     public Telefone(TelefoneDTO telefoneDTO) {
         this.numero = telefoneDTO.getNumero();
+        this.ddd = telefoneDTO.getDdd();
     }
 }
